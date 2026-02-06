@@ -1,2 +1,0 @@
-PROJECT RULES:
-1. cannot hard code password
