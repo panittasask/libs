@@ -1,0 +1,14 @@
+.button-click {
+  border-radius: 5px;
+  border: 1px solid #84e6de;
+  background-color: hsl(from #84e6de h 80% 90%);
+  padding: 5px 10px;
+  font-size: 16px;
+  color: hsl(from #84e6de h 60% 60%);
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: hsl(from #84e6de h 90% 50%);
+  }
+}

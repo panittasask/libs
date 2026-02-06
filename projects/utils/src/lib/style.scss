@@ -1,0 +1,138 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+:host {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: hidden;
+}
+:root {
+  --modal-width: 500px;
+  --modal-max-width: 100%;
+  --modal-max-height: 100%;
+
+  --modal-width-sm: 300px;
+  --modal-width-lg: 800px;
+  --modal-width-xl: 1140px;
+
+  --modal-padding: 1.5rem;
+  --modal-radius: 8px;
+
+  --modal-bg: #ffffff;
+  --modal-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --modal-overlay-blur: blur(4px);
+
+  --z-modal-backdrop: 1040;
+  --z-modal-content: 1050;
+}
+.cdk-overlay-pane.modal-content {
+  overflow: hidden;
+  background-color: var(--modal-bg);
+  max-width: var(--modal-max-width);
+  max-height: var(--modal-max-height);
+  margin: 0;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+  // width: var(--modal-width);
+  width: auto;
+  height: auto;
+  // min-width: 500px;
+  // min-height: 250px;
+  // height: auto;
+  // padding: 20px;
+  // max-width: 90%;
+  // overflow: visible;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0 12px 12px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  // & > * {
+  //   height: 100vh;
+  //   width: 100%;
+  //   & > * {
+  //     height: 100vh;
+  //     width: 100%;
+  //   }
+  // }
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1;
+}
+.cdk-global-overlay-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  align-self: center !important;
+
+  // display: block !important;
+}
+.modal-lg {
+  --modal-width: var(--modal-width-lg);
+}
+
+.modal-xl {
+  --modal-width: var(--modal-width-xl);
+}
+:root {
+  --modal-width: 92vw;
+  --modal-padding: 1rem;
+}
+
+// @media (min-width: 576px) {
+//   :root {
+//     --modal-width: 500px;
+//     --modal-padding: 1.25rem;
+//   }
+// }
+
+// @media (min-width: 768px) {
+//   :root {
+//     --modal-width: 600px;
+//     --modal-padding: 1.5rem;
+//   }
+// }
+
+// @media (min-width: 992px) {
+//   :root {
+//     --modal-width: 600px;
+//   }
+// }
+
+// @media (min-width: 1200px) {
+//   :root {
+//     --modal-width: 700px;
+//   }
+// }

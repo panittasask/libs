@@ -1,0 +1,180 @@
+<div id="modal-header" class="tw-text-center">
+  <div
+    class="tw-w-16 tw-h-16 tw-bg-blue-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-2"
+  >
+    <i class="fa-solid fa-file-text tw-text-xl tw-text-blue-600"></i>
+  </div>
+  <h2 class="tw-text-xl tw-font-bold tw-text-gray-900 tw-mb-2">
+    {{ uploading ? "อัปโหลดเรซูเม่" : "เลือกวิธีการสร้างเรซูเม่" }}
+  </h2>
+  <p class="tw-text-gray-600 tw-text-lg">
+    {{
+      uploading ? "กำลังอัปโหลดและวิเคราะห์เอกสาร" : "เลือกวิธีที่เหมาะกับคุณ"
+    }}
+  </p>
+</div>
+
+<div
+  id="modal-backdrop"
+  class="tw-flex tw-items-center tw-justify-center"
+  *ngIf="!uploading"
+  @fadeInOut
+>
+  <!-- Modal Container -->
+  <div id="resume-selection-modal" class="tw-max-w-md tw-relative">
+    <!-- Close Button -->
+
+    <!-- Selection Options -->
+    <div id="selection-options" class="tw-grid tw-grid-cols-2 tw-gap-4">
+      <!-- Manual Edit -->
+      <div
+        id="manual-edit-option"
+        class="group tw-cursor-pointer"
+        (click)="manualUpload()"
+      >
+        <div
+          class="tw-border tw-border-gray-200 tw-rounded-lg tw-p-4 tw-text-center hover:tw-border-blue-500 hover:tw-bg-blue-50 tw-transition-all tw-duration-300"
+        >
+          <div
+            class="tw-w-12 tw-h-12 tw-bg-green-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-3"
+          >
+            <i class="fa-solid fa-edit tw-text-xl tw-text-green-600"></i>
+          </div>
+
+          <h3 class="tw-text-lg tw-font-semibold tw-text-gray-900 tw-mb-1">
+            กรอกข้อมูลด้วยตัวเอง
+          </h3>
+          <p class="tw-text-gray-600 tw-text-xs tw-mb-3">
+            เขียนเรซูเม่ด้วยตัวเองทีละขั้นตอน
+          </p>
+
+          <div
+            class="tw-flex tw-items-center tw-justify-center tw-text-xs tw-text-gray-500"
+          >
+            <i class="fa-solid fa-clock tw-mr-1"></i>
+            15-20 นาที
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Resume -->
+      <div
+        id="upload-resume-option"
+        class="group tw-cursor-pointer"
+        (click)="onClickUpload()"
+      >
+        <div
+          class="tw-border tw-border-gray-200 tw-rounded-lg tw-p-4 tw-text-center hover:tw-border-blue-500 hover:tw-bg-blue-50 tw-transition-all tw-duration-300 tw-h-full"
+        >
+          <div
+            class="tw-w-12 tw-h-12 tw-bg-purple-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-3"
+          >
+            <i class="fa-solid fa-upload tw-text-xl tw-text-purple-600"></i>
+          </div>
+
+          <h3 class="tw-text-lg tw-font-semibold tw-text-gray-900 tw-mb-1">
+            อัปโหลดเรซูเม่
+          </h3>
+          <p class="tw-text-gray-600 tw-text-xs tw-mb-3">
+            อัปโหลดไฟล์เรซูเม่เดิมของคุณ
+          </p>
+
+          <div
+            class="tw-flex tw-items-center tw-justify-center tw-text-xs tw-text-gray-500"
+          >
+            <i class="fa-solid fa-bolt tw-mr-1"></i>
+            <span> 2-3 นาที </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div
+      id="additional-info"
+      class="tw-mt-6 tw-p-3 tw-bg-gray-50 tw-rounded-lg"
+    >
+      <div class="tw-flex tw-items-start tw-space-x-2">
+        <div
+          class="tw-w-5 tw-h-5 tw-bg-blue-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-flex-shrink-0 tw-mt-0.5"
+        >
+          <i class="fa-solid fa-info tw-text-[10px] tw-text-blue-600"></i>
+        </div>
+
+        <div>
+          <h4 class="tw-font-medium tw-text-gray-900 tw-text-sm tw-mb-1">
+            ต้องการความช่วยเหลือ?
+          </h4>
+          <p class="tw-text-xs tw-text-gray-600">
+            เราจะช่วยคุณสร้างเรซูเม่ที่ดีที่สุด
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="edit-mode-body-container-progress-bar" *ngIf="uploading" @fadeInOut>
+  <div class="progress-bar-container">
+    <div class="progress-bar-box">
+      <div class="full-loading-bar"></div>
+      <div
+        class="progress-bar"
+        [class.full-load]="progressBar === 100"
+        [style.width]="progressBar + '%'"
+      ></div>
+    </div>
+    <div class="progress-text">{{ progressBar }}%</div>
+  </div>
+  <div class="progress-bar-information">
+    <div class="fade-div resume-parsing">
+      <span>1. อัปโหลดเอกสาร</span>
+      <span *ngIf="parsingState.insert === false" class="loader"></span>
+      <i
+        *ngIf="parsingState.insert"
+        class="fa-solid fa-circle-check"
+        style="color: #019354"
+      ></i>
+    </div>
+    <div
+      [style.opacity]="parsingState.insert ? 1 : 0"
+      class="fade-div detail-save"
+    >
+      <span>2. วิเคราะห์ด้วย AI</span>
+      <span *ngIf="parsingState.complete === false" class="loader"></span>
+      <i
+        *ngIf="parsingState.complete"
+        class="fa-solid fa-circle-check"
+        style="color: #019354"
+      ></i>
+    </div>
+    <div
+      [style.opacity]="parsingState.complete ? 1 : 0"
+      class="fade-div complete"
+    >
+      <span>3. อัปโหลดสำเร็จ</span>
+      <i
+        *ngIf="parsingState.complete"
+        class="fa-solid fa-circle-check"
+        style="color: #019354"
+      ></i>
+
+      <!-- <span class="loader"></span>
+          <i class="fa-solid fa-circle-check" style="color: #019354"></i> -->
+    </div>
+    <div
+      [style.opacity]="parsingState.complete ? 1 : 0"
+      class="fade-div button-complete"
+    >
+      <button class="btn btn-success" (click)="complete()">เสร็จสิ้น</button>
+    </div>
+  </div>
+</div>
+
+<input
+  id="upload-resume"
+  (change)="onResumeUpload($event)"
+  accept=".pdf,.doc,.docx,.png,.jpg"
+  type="file"
+  style="visibility: hidden"
+/>
+
