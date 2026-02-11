@@ -11,6 +11,9 @@
     "paths": {
       "libs": [
         "./dist/libs"
+      ],
+      "tooltip": [
+        "./dist/tooltip"
       ]
     },
     "noFallthroughCasesInSwitch": true,

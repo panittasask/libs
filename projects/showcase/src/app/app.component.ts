@@ -1,11 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { ANIMATION_MODULE_TYPE, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { modal_config, ModalLibsComponent, ModalLibsService } from 'libs';
+import {
+  modal_config,
+  ModalLibsComponent,
+  ModalLibsService,
+  TooltipDirective,
+} from 'libs';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ModalLibsComponent],
+  imports: [RouterOutlet, ModalLibsComponent, TooltipDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,1 +1,10 @@
-<button class="button-click" (click)="showModal()">click</button>
+<div class="container">
+  <button
+    class="button-click"
+    [appTooltip]="'tooltip item data clikc function'"
+    (click)="showModal()"
+  >
+    click
+  </button>
+</div>
+<!-- <button class="button-click" [appTooltip]></button> -->

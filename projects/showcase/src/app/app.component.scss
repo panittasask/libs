@@ -12,3 +12,9 @@
     background-color: hsl(from #84e6de h 90% 50%);
   }
 }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
