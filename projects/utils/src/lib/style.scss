@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 :root {
-  --modal-width: 500px;
+  // --modal-width: 500px;
   --modal-max-width: 100%;
   --modal-max-height: 100%;
 
@@ -43,7 +43,8 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 8px;
   // width: var(--modal-width);
-  width: auto;
+  // width: auto;
+  width: var(--modal-width, auto); // แนะนำให้มีค่า Default หรือรับจาก Variable
   height: auto;
   // min-width: 500px;
   // min-height: 250px;
@@ -70,6 +71,26 @@
     border-radius: 20px;
     border: 2px solid transparent;
     background-clip: content-box;
+  }
+  & > * {
+    flex: 1; // สั่งให้ลูกยืดเต็มพื้นที่ที่เหลือ
+    overflow-y: auto; // ถ้าเนื้อหาเกิน ให้ Scroll เฉพาะลูก
+    overflow-x: hidden;
+    min-height: 0; // 🛠️ แก้บั๊ก Flexbox: ถ้าไม่มีอันนี้ scroll จะไม่ทำงานในบาง browser
+
+    // จัดการ Scrollbar ให้สวยงาม (เฉพาะในลูก)
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 20px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
   }
 
   // & > * {
@@ -107,7 +128,7 @@
   --modal-width: var(--modal-width-xl);
 }
 :root {
-  --modal-width: 92vw;
+  // --modal-width: 92vw;
   --modal-padding: 1rem;
 }
 
